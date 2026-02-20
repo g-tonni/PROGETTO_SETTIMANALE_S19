@@ -44,9 +44,9 @@ public class EventiService {
        return this.eventiRepository.findById(eventoId).orElseThrow(() -> new NotFoundException(eventoId));
     }
 
-    public Evento putEvento(UUID eventoId, EventoDTO body, UUID utenteId){
+    public Evento putEvento(UUID eventoId, EventoDTO body, UUID organizzatoreId){
         Evento evento = this.findById(eventoId);
-        Utente organizzatore = this.utentiService.findById(utenteId);
+        Utente organizzatore = this.utentiService.findById(organizzatoreId);
         if (!evento.getOrganizzatore().getUtenteId().equals(organizzatore.getUtenteId()))
             throw new BadRequestException("È possibile modificare solo gli eventi pubblicati dal proprio account");
         if (body.data().isBefore(LocalDate.now())) throw new BadRequestException("La data dell'evento deve essere successiva alla data di oggi");
@@ -62,5 +62,14 @@ public class EventiService {
         System.out.println("Evento aggiornato");
 
         return evento;
+    }
+
+    public void deleteEvento(UUID eventoId, UUID organizzatoreId){
+        Evento evento = this.findById(eventoId);
+        Utente organizzatore = this.utentiService.findById(organizzatoreId);
+        if (!evento.getOrganizzatore().getUtenteId().equals(organizzatore.getUtenteId()))
+            throw new BadRequestException("È possibile eliminare solo gli eventi pubblicati dal proprio account");
+        this.eventiRepository.delete(evento);
+        System.out.println("Evento eliminato");
     }
 }
