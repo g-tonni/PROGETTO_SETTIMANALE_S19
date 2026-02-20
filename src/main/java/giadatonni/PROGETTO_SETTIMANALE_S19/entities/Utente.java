@@ -1,0 +1,96 @@
+package giadatonni.PROGETTO_SETTIMANALE_S19.entities;
+
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Entity
+@Table(name = "utenti")
+public class Utente {
+    @Id
+    @GeneratedValue
+    @Column(name = "utente_id")
+    private UUID utenteId;
+
+    @Column(nullable = false)
+    private String nome;
+
+    @Column(nullable = false)
+    private String cognome;
+
+    @Column(name = "data_nascita", nullable = false)
+    private LocalDate dataNascita;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Ruolo ruolo;
+
+    public Utente(String nome, String cognome, LocalDate dataNascita, String email, String password, Ruolo ruolo) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataNascita = dataNascita;
+        this.email = email;
+        this.password = password;
+        this.ruolo = ruolo;
+    }
+
+    public UUID getUtenteId() {
+        return utenteId;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public LocalDate getDataNascita() {
+        return dataNascita;
+    }
+
+    public void setDataNascita(LocalDate dataNascita) {
+        this.dataNascita = dataNascita;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Ruolo getRuolo() {
+        return ruolo;
+    }
+
+    public void setRuolo(Ruolo ruolo) {
+        this.ruolo = ruolo;
+    }
+}
