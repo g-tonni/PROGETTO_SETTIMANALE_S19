@@ -39,6 +39,10 @@ public class PrenotazioniService {
         List<Prenotazione> listaPrenotazioni = this.prenotazioniRepository.findByUtenteEdEvento(evento.getEventoId(), utente.getUtenteId());
         if(!listaPrenotazioni.isEmpty()) throw new BadRequestException("Non è possibile effettuare più di una prenotazione per lo stesso utente per lo stesso evento");
 
+        List<Prenotazione> totPrenotazioniEvento = this.prenotazioniRepository.findAllByEvento(evento.getEventoId());
+        if(totPrenotazioniEvento.size() >= evento.getMaxIngressi())
+            throw new BadRequestException("Evento SOLD OUT");
+
         Prenotazione nuovaPrenotazione = new Prenotazione(LocalDate.now(), utente, evento);
 
         this.prenotazioniRepository.save(nuovaPrenotazione);
