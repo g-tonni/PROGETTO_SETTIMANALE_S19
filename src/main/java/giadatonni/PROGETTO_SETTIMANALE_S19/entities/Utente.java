@@ -1,14 +1,21 @@
 package giadatonni.PROGETTO_SETTIMANALE_S19.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "utenti")
-public class Utente {
+@JsonIgnoreProperties({"password", "ruolo", "accountNonExpired", "accountNonLocked", "authorities", "credentialsNonExpired", "enabled"})
+public class Utente implements UserDetails {
     @Id
     @GeneratedValue
     @Column(name = "utente_id")
@@ -40,6 +47,17 @@ public class Utente {
         this.email = email;
         this.password = password;
         this.ruolo = ruolo;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.ruolo.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
     public UUID getUtenteId() {
@@ -92,5 +110,18 @@ public class Utente {
 
     public void setRuolo(Ruolo ruolo) {
         this.ruolo = ruolo;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "utenteId=" + utenteId +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", dataNascita=" + dataNascita +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", ruolo=" + ruolo +
+                '}';
     }
 }

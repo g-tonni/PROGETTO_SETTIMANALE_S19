@@ -89,4 +89,17 @@ public class Evento {
     public Utente getOrganizzatore() {
         return organizzatore;
     }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "eventoId=" + eventoId +
+                ", titolo='" + titolo + '\'' +
+                ", descrizione='" + descrizione + '\'' +
+                ", data=" + data +
+                ", luogo='" + luogo + '\'' +
+                ", maxIngressi=" + maxIngressi +
+                ", organizzatore=" + organizzatore +
+                '}';
+    }
 }

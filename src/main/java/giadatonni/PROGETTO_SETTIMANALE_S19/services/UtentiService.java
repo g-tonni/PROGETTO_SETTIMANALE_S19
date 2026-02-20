@@ -3,12 +3,14 @@ package giadatonni.PROGETTO_SETTIMANALE_S19.services;
 import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Ruolo;
 import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Utente;
 import giadatonni.PROGETTO_SETTIMANALE_S19.exceptions.BadRequestException;
+import giadatonni.PROGETTO_SETTIMANALE_S19.exceptions.NotFoundException;
 import giadatonni.PROGETTO_SETTIMANALE_S19.payloads.UtenteDTO;
 import giadatonni.PROGETTO_SETTIMANALE_S19.repositories.UtentiRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Service
 public class UtentiService {
@@ -35,5 +37,9 @@ public class UtentiService {
         this.utentiRepository.save(nuovoUtente);
         System.out.println("Utente salvato");
         return nuovoUtente;
+    }
+
+    public Utente findById (UUID utenteId){
+        return this.utentiRepository.findById(utenteId).orElseThrow(() -> new NotFoundException(utenteId));
     }
 }

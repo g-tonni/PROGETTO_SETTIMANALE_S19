@@ -28,6 +28,6 @@ public record UtenteDTO (
     String password,
 
     @NotBlank(message = "Il ruolo deve essere inserito")
-    @Size(min = 6, max = 15, message = "Il ruolo deve essere compresa tra i 6 e i 15 caratteri")
+    @Size(min = 6, max = 15, message = "Il ruolo deve essere compreso tra i 6 e i 15 caratteri")
     String ruolo
 ) {}

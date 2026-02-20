@@ -24,4 +24,30 @@ public class Prenotazione {
     @ManyToOne
     @JoinColumn(name = "evento_id", nullable = false)
     private Evento evento;
+
+    public UUID getPrenotazioneId() {
+        return prenotazioneId;
+    }
+
+    public LocalDate getDataPrenotazione() {
+        return dataPrenotazione;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    @Override
+    public String toString() {
+        return "Prenotazione{" +
+                "prenotazioneId=" + prenotazioneId +
+                ", dataPrenotazione=" + dataPrenotazione +
+                ", utente=" + utente +
+                ", evento=" + evento +
+                '}';
+    }
 }
