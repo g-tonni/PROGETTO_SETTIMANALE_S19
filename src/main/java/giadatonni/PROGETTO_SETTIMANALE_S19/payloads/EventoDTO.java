@@ -23,9 +23,6 @@ public record EventoDTO (
 
         @Min(value = 50, message = "Il numero di ingressi deve essere un minimo di 50")
         @Max(value = 1000, message = "Il numero di ingressi deve essere massimo di 1000")
-        int maxIngressi,
-
-        @NotNull
-        UUID organizzatoreId
+        int maxIngressi
 ){
 }

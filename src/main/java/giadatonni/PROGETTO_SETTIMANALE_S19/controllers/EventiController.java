@@ -1,14 +1,15 @@
 package giadatonni.PROGETTO_SETTIMANALE_S19.controllers;
 
 import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Evento;
+import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Utente;
 import giadatonni.PROGETTO_SETTIMANALE_S19.payloads.EventoDTO;
 import giadatonni.PROGETTO_SETTIMANALE_S19.services.EventiService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/eventi")
@@ -22,7 +23,15 @@ public class EventiController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ORGANIZZATORE')")
-    public Evento postEvento(@RequestBody @Validated EventoDTO body){
-        return this.eventiService.saveEvento(body);
+    public Evento postEvento(@RequestBody @Validated EventoDTO body, @AuthenticationPrincipal Utente utenteAutenticato){
+        return this.eventiService.saveEvento(body, utenteAutenticato.getUtenteId());
     }
+
+    @PutMapping("/{eventoId}")
+    @PreAuthorize("hasAnyAuthority('ORGANIZZATORE')")
+    public Evento putEvento(@PathVariable UUID eventoId, @RequestBody @Validated EventoDTO body, @AuthenticationPrincipal Utente utenteAutenticato){
+        return this.eventiService.putEvento(eventoId, body, utenteAutenticato.getUtenteId());
+    }
+
+
 }
