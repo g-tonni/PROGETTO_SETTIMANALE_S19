@@ -3,6 +3,7 @@ package giadatonni.PROGETTO_SETTIMANALE_S19.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "utenti")
 @JsonIgnoreProperties({"password", "ruolo", "accountNonExpired", "accountNonLocked", "authorities", "credentialsNonExpired", "enabled"})
+@NoArgsConstructor
 public class Utente implements UserDetails {
     @Id
     @GeneratedValue

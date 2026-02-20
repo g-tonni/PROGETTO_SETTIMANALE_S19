@@ -2,12 +2,14 @@ package giadatonni.PROGETTO_SETTIMANALE_S19.entities;
 
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Table(name = "prenotazioni")
+@NoArgsConstructor
 public class Prenotazione {
     @Id
     @GeneratedValue
