@@ -1,6 +1,8 @@
 package giadatonni.PROGETTO_SETTIMANALE_S19.repositories;
 
 import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Prenotazione;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,4 +18,9 @@ public interface PrenotazioniRepository extends JpaRepository<Prenotazione, UUID
 
     @Query("SELECT p FROM Prenotazione p WHERE p.evento.eventoId = :eventoId")
     List<Prenotazione> findAllByEvento(UUID eventoId);
+
+    @Query("SELECT p FROM Prenotazione p WHERE p.utente.utenteId = :utenteId")
+    Page<Prenotazione> findAllByUtente(UUID utenteId, Pageable pageable);
+
+
 }

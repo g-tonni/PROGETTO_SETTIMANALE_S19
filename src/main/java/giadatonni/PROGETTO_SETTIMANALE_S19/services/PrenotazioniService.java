@@ -5,6 +5,7 @@ import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Prenotazione;
 import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Ruolo;
 import giadatonni.PROGETTO_SETTIMANALE_S19.entities.Utente;
 import giadatonni.PROGETTO_SETTIMANALE_S19.exceptions.BadRequestException;
+import giadatonni.PROGETTO_SETTIMANALE_S19.exceptions.NotFoundException;
 import giadatonni.PROGETTO_SETTIMANALE_S19.payloads.PrenotazioneDTO;
 import giadatonni.PROGETTO_SETTIMANALE_S19.repositories.PrenotazioniRepository;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,5 @@ public class PrenotazioniService {
 
         return nuovaPrenotazione;
     }
+
 }
